@@ -1,0 +1,28 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "snovalang_manifest",
+      "camelcase": "SnovalangManifest",
+      "scope": "source.snovalang-manifest",
+      "path": ".",
+      "file-types": [
+        "mod.sno"
+      ],
+      "injection-regex": "^snovalang_manifest$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for Snovalang Manifest",
+    "authors": [
+      {
+        "name": "Snovalang Contributors"
+      }
+    ]
+  },
+  "bindings": {
+    "c": true
+  }
+}

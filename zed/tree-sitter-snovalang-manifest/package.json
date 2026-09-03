@@ -1,7 +1,7 @@
 {
-  "name": "tree-sitter-toml",
+  "name": "tree-sitter-snovalang-manifest",
   "version": "0.5.1",
-  "description": "TOML grammar for tree-sitter",
+  "description": "Tree-sitter grammar for Snovalang Manifest",
   "keywords": [
     "parser",
     "lexer"
@@ -16,8 +16,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "yarn tree-sitter test",
-    "prepack": "yarn tree-sitter generate",
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
     "release": "standard-version --commit-all",
     "tree-sitter": "./tree-sitter/target/release/tree-sitter"
   },
@@ -32,7 +32,8 @@
   },
   "devDependencies": {
     "regexp-util": "1.2.2",
-    "standard-version": "7.0.0"
+    "standard-version": "7.0.0",
+    "tree-sitter-cli": "^0.25.9"
   },
   "files": [
     "/src/",

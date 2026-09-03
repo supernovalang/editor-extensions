@@ -2283,10 +2283,6 @@
     [
       "lambda_parameter",
       "qualified_identifier"
-    ],
-    [
-      "inline_member_declaration",
-      "qualified_identifier"
     ]
   ],
   "precedences": [],

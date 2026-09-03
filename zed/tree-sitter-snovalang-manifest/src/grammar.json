@@ -1,5 +1,6 @@
 {
-  "name": "toml",
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "snovalang_manifest",
   "rules": {
     "document": {
       "type": "SEQ",
@@ -833,6 +834,6 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
-

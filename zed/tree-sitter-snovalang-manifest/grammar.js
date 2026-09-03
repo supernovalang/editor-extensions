@@ -20,7 +20,7 @@ const rfc3339_time = /([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)([.][0-9]+)
 const rfc3339_offset = /([zZ])|([+-]([01][0-9]|2[0-3]):[0-5][0-9])/;
 
 module.exports = grammar({
-  name: "toml",
+  name: "snovalang_manifest",
 
   externals: $ => [
     $._line_ending_or_eof,
