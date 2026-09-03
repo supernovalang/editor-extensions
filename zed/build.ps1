@@ -84,7 +84,18 @@ if ($Install) {
         $lspSource = Join-Path $scriptDir "..\..\snova-lsp\build\snova-lsp.exe"
     }
     if (Test-Path $lspSource) {
-        Copy-Item -Force $lspSource (Join-Path $zedBinDir "snova-lsp.exe")
+        $targetLsp = Join-Path $zedBinDir "snova-lsp.exe"
+        if (Test-Path $targetLsp) {
+            try {
+                Copy-Item -Force $lspSource $targetLsp
+            } catch {
+                Move-Item -Path $targetLsp -Destination "$targetLsp.old" -Force
+                Copy-Item -Force $lspSource $targetLsp
+                Remove-Item "$targetLsp.old" -Force -ErrorAction SilentlyContinue
+            }
+        } else {
+            Copy-Item -Force $lspSource $targetLsp
+        }
         $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
         $pathEntries = @($userPath -split ';' | Where-Object { $_ })
         if ($pathEntries -notcontains $zedBinDir) {

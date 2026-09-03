@@ -73,5 +73,25 @@
             "}"
         ],
         "description": "Declares a concurrent pulsar worker"
+    },
+    "HttpServer Definition": {
+        "prefix": "httpserver",
+        "body": [
+            "let server = HttpServer.new()",
+            "server.get(\"${1:/}\", (req, res) -> {",
+            "\tres.status(200).send(\"${2:Hello, Snovalang!}\")",
+            "})",
+            "server.listen(${3:8080})"
+        ],
+        "description": "Create and start a pure Snovalang HTTP server"
+    },
+    "Http Route Handler": {
+        "prefix": "route",
+        "body": [
+            "server.${1|get,post,put,delete|}(\"${2:/path}\", (req, res) -> {",
+            "\t$0",
+            "})"
+        ],
+        "description": "Add an HTTP route handler"
     }
 }

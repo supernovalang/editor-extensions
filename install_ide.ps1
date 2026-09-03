@@ -95,8 +95,29 @@ if ($selectedTags -contains "default") {
     }
 }
 if ($selectedTags -contains "vscode") {
-    Write-Host "Installing Snovalang extension for VS Code..."
-    # Example: code --install-extension snovalang.snovalang
+    Write-Host "Installing Snovalang extension for VS Code..." -ForegroundColor Cyan
+
+    $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    $vsCodeSrc = Join-Path $scriptDir "vscode"
+    $targetDir = Join-Path $env:USERPROFILE ".vscode\extensions\supernovalang.snovalang-0.1.0"
+
+    if (Test-Path $targetDir) {
+        Remove-Item -Recurse -Force $targetDir
+    }
+    New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
+
+    Copy-Item -Path (Join-Path $vsCodeSrc "package.json") -Destination $targetDir -Force
+    Copy-Item -Path (Join-Path $vsCodeSrc "language-configuration.json") -Destination $targetDir -Force
+    Copy-Item -Path (Join-Path $vsCodeSrc "README.md") -Destination $targetDir -Force
+    Copy-Item -Recurse -Force (Join-Path $vsCodeSrc "out") $targetDir
+    Copy-Item -Recurse -Force (Join-Path $vsCodeSrc "snippets") $targetDir
+    Copy-Item -Recurse -Force (Join-Path $vsCodeSrc "syntaxes") $targetDir
+    if (Test-Path (Join-Path $vsCodeSrc "node_modules")) {
+        Copy-Item -Recurse -Force (Join-Path $vsCodeSrc "node_modules") $targetDir
+    }
+
+    Write-Host "[OK] Snovalang extension installed to: $targetDir" -ForegroundColor Green
+    Write-Host "Restart or reload VS Code (Ctrl+Shift+P -> 'Developer: Reload Window') to activate." -ForegroundColor Yellow
 }
 if ($selectedTags -contains "zed") {
     Write-Host "Installing Snovalang extension for Zed..." -ForegroundColor Cyan
