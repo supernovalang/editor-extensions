@@ -11,3 +11,8 @@ Extensão oficial da linguagem Snovalang para o editor **Zed**.
 ## Instalação no Zed
 1. Certifique-se de que o executável `snova-lsp` está disponível no seu `PATH`.
 2. Instale como dev extension no Zed apontando para este diretório.
+
+Os grammars são carregados dos diretórios `tree-sitter-snovalang` e
+`tree-sitter-snovalang-manifest` neste repositório, usando a revisão fixada em
+`extension.toml`. Para atualizar uma revisão publicada, altere os SHAs no
+manifesto após gerar e validar os parsers.

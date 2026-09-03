@@ -13,10 +13,7 @@ impl Extension for SnovalangExtension {
         language_server_id: &LanguageServerId,
         worktree: &Worktree,
     ) -> zed::Result<Command> {
-        if language_server_id.as_ref() != "snova_lsp"
-            && language_server_id.as_ref() != "snova-lsp"
-            && language_server_id.as_ref() != "snovalang-lsp"
-        {
+        if language_server_id.as_ref() != "snova_lsp" {
             return Err(format!(
                 "unknown Snovalang language server: {language_server_id}"
             ));
@@ -35,15 +32,10 @@ impl Extension for SnovalangExtension {
             format!("{}/tools/bin/{}", worktree.root_path(), binary_name)
         };
 
-        let command = if let Some(path) = worktree.which("snova-lsp") {
-            path
-        } else if let Some(path) = worktree.which("snovalang-lsp") {
-            path
-        } else if Path::new(&local_lsp).exists() {
-            local_lsp
-        } else {
-            "snova-lsp".to_string()
-        };
+        let command = worktree
+            .which(binary_name)
+            .or_else(|| Path::new(&local_lsp).exists().then_some(local_lsp))
+            .ok_or_else(|| format!("{binary_name} was not found in PATH or tools/bin"))?;
 
         Ok(Command {
             command,
