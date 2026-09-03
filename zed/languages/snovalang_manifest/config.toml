@@ -1,0 +1,11 @@
+name = "Snovalang Manifest"
+grammar = "snovalang_manifest"
+path_suffixes = ["mod.sno", "sno", "snova.sno", "snova.toml", "Snovalang.toml"]
+line_comments = ["# "]
+brackets = [
+  { start = "[", end = "]", close = true, newline = false },
+  { start = "{", end = "}", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false },
+  { start = "'", end = "'", close = true, newline = false },
+]
+autoclose_before = ";:.,=}])> \n\t"

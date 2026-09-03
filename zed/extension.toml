@@ -5,3 +5,15 @@ schema_version = 1
 authors = ["Aggitech Team <dev@aggitech.com>"]
 description = "Snovalang language support and LSP integration for Zed editor"
 repository = "https://github.com/aggitech/snova-zed"
+
+[grammars.snovalang]
+repository = "file:///home/yuri/Projetos/Snovalang/editor-extensions/zed/tree-sitter-snovalang"
+rev = "fdfd66b11c60e6e698a3f0b42920b9ebd3167d22"
+
+[grammars.snovalang_manifest]
+repository = "file:///home/yuri/Projetos/Snovalang/editor-extensions/zed/tree-sitter-snovalang-manifest"
+rev = "5d3bf045cd3497f3c6134cc3405fc724c71cd3e6"
+
+[language_servers.snova_lsp]
+name = "snova-lsp"
+languages = ["Snovalang", "Snovalang Manifest"]

@@ -1,6 +1,6 @@
-(class_decl name: (identifier) @name) @item
-(struct_decl name: (identifier) @name) @item
-(enum_decl name: (identifier) @name) @item
-(interface_decl name: (identifier) @name) @item
-(func_decl name: (identifier) @name) @item
-(method_decl name: (identifier) @name) @item
+(type_declaration name: (identifier) @name) @item
+(function_declaration name: (identifier) @name) @item
+(pulsar_declaration name: (identifier) @name) @item
+(method_declaration name: (identifier) @name) @item
+(property_declaration name: (identifier) @name) @item
+

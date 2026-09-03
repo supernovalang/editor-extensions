@@ -2,91 +2,152 @@
 [
   "package"
   "import"
+  "using"
   "class"
+  "interface"
   "struct"
   "enum"
-  "interface"
+  "trait"
+  "extension"
+  "data"
   "func"
+  "pulsar"
   "method"
   "let"
   "var"
-  "const"
-  "if"
-  "else"
-  "while"
+  "get"
+  "set"
   "for"
   "in"
-  "match"
   "return"
-  "break"
-  "continue"
-  "try"
-  "catch"
-  "throw"
-  "defer"
-  "async"
-  "await"
-  "pulsar"
-  "this"
+  "if"
+  "else"
+  "match"
   "new"
-  "as"
-  "is"
+  "await"
+  "async"
+  "unsafe"
+  "defer"
+  "implements"
+  "extends"
 ] @keyword
 
-; Visibility modifiers
+; Modifiers
 [
   "public"
   "private"
   "protected"
-  "override"
+  "internal"
   "static"
+  "abstract"
+  "final"
+  "sealed"
+  "override"
+  "mut"
+  "const"
 ] @keyword.modifier
 
-; Booleans & Literals
+; Booleans
 [
   "true"
   "false"
 ] @boolean
 
-; Primitive Types
-[
-  "int"
-  "long"
-  "double"
-  "decimal"
-  "string"
-  "bool"
-  "unit"
-] @type.builtin
-
-; Strings and Characters
-(string_literal) @string
-(escape_sequence) @string.escape
-(char_literal) @character
-
-; Numbers
-(number_literal) @number
+(boolean) @boolean
 
 ; Comments
 (line_comment) @comment
 (block_comment) @comment
 
-; Functions and Methods
-(func_decl name: (identifier) @function)
-(method_decl name: (identifier) @function.method)
-(call_expr callee: (identifier) @function.call)
+; Literals
+(number) @number
+(string) @string
 
-; Types and Structs
-(class_decl name: (identifier) @type)
-(struct_decl name: (identifier) @type)
-(enum_decl name: (identifier) @type)
-(interface_decl name: (identifier) @type)
+; Compile decorator
+(compile_decorator
+  "@" @punctuation.special
+  name: (identifier) @attribute)
+
+; Function & Method declarations
+(function_declaration
+  name: (identifier) @function)
+
+(pulsar_declaration
+  name: (identifier) @function)
+
+(method_declaration
+  name: (identifier) @function.method)
+
+; Type declarations
+(type_declaration
+  name: (identifier) @type)
+
+; Parameters & Variables
+(parameter
+  name: (identifier) @variable.parameter)
+
+(property_declaration
+  name: (identifier) @variable)
+
+(for_statement
+  variable: (identifier) @variable)
+
+(receive_bind
+  name: (identifier) @variable)
+
+(lambda_parameter
+  (identifier) @variable.parameter)
+
+; Calls
+(call_expression
+  (qualified_identifier) @function.call)
+
+(new_expression
+  (qualified_identifier) @type)
+
+; Types in type nodes and parameters
+(type
+  (qualified_identifier) @type)
+
+(type_list
+  (type) @type)
 
 ; Operators
 [
-  "+" "-" "*" "/" "%"
-  "=" "==" "!=" "<" ">" "<=" ">="
-  "&&" "||" "!"
-  "->" "~>" "<~" "=>"
-  "??" "?."
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "="
+  "=="
+  "!="
+  "<"
+  ">"
+  "<="
+  ">="
+  "&&"
+  "||"
+  "!"
+  "->"
+  "<~"
+  "=>"
+  "?"
+  "~"
+  "&"
 ] @operator
+
+; Punctuation
+[
+  "("
+  ")"
+  "{"
+  "}"
+] @punctuation.bracket
+
+[
+  ","
+  "."
+  ":"
+] @punctuation.delimiter
+

@@ -1,18 +1,13 @@
 name = "Snovalang"
 grammar = "snovalang"
-path_suffixes = ["snova", "sno"]
+path_suffixes = ["snova"]
 line_comments = ["// "]
 block_comment = ["/*", "*/"]
-
-[brackets]
-paired = [
-    ["{", "}"],
-    ["[", "]"],
-    ["(", ")"],
-    ["\"", "\""],
-    ["'", "'"],
+brackets = [
+  { start = "{", end = "}", close = true, newline = true },
+  { start = "[", end = "]", close = true, newline = true },
+  { start = "(", end = ")", close = true, newline = true },
+  { start = "\"", end = "\"", close = true, newline = false },
+  { start = "'", end = "'", close = true, newline = false },
 ]
-
-[language_servers.snova_lsp]
-command = "snova-lsp"
-args = ["--stdio"]
+autoclose_before = ";:.,=}])> \n\t"

@@ -14,15 +14,25 @@
     ],
     "main": "./out/extension.js",
     "activationEvents": [
-        "onLanguage:snova"
+        "onLanguage:snova",
+        "onLanguage:snova-manifest",
+        "workspaceContains:**/mod.sno",
+        "workspaceContains:**/snova.sno",
+        "workspaceContains:**/snova.toml"
     ],
     "contributes": {
         "languages": [
             {
                 "id": "snova",
                 "aliases": ["Snovalang", "snova"],
-                "extensions": [".snova", ".sno"],
+                "extensions": [".snova"],
                 "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "snova-manifest",
+                "aliases": ["Snovalang Manifest", "mod.sno"],
+                "filenames": ["mod.sno", "snova.sno", "snova.toml", "Snovalang.toml"],
+                "extensions": [".sno"]
             }
         ],
         "grammars": [
