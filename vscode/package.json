@@ -25,14 +25,13 @@
             {
                 "id": "snova",
                 "aliases": ["Snovalang", "snova"],
-                "extensions": [".snova"],
+                "extensions": [".snova", ".sno"],
                 "configuration": "./language-configuration.json"
             },
             {
                 "id": "snova-manifest",
                 "aliases": ["Snovalang Manifest", "mod.sno"],
-                "filenames": ["mod.sno", "snova.sno", "snova.toml", "Snovalang.toml"],
-                "extensions": [".sno"]
+                "filenames": ["mod.sno", "snova.mod", "snova.sno", "snova.toml", "Snovalang.toml"]
             }
         ],
         "grammars": [
@@ -40,6 +39,11 @@
                 "language": "snova",
                 "scopeName": "source.snova",
                 "path": "./syntaxes/snovalang.tmLanguage.json"
+            },
+            {
+                "language": "snova-manifest",
+                "scopeName": "source.snova.manifest",
+                "path": "./syntaxes/snovalang-manifest.tmLanguage.json"
             }
         ],
         "snippets": [

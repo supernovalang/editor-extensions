@@ -19,9 +19,12 @@ export function activate(context: ExtensionContext) {
   };
 
   const clientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: "file", language: "snova" }],
+    documentSelector: [
+      { scheme: "file", language: "snova" },
+      { scheme: "file", language: "snova-manifest" }
+    ],
     synchronize: {
-      fileEvents: workspace.createFileSystemWatcher("**/*.snova"),
+      fileEvents: workspace.createFileSystemWatcher("**/*.{snova,sno}"),
     },
   };
 

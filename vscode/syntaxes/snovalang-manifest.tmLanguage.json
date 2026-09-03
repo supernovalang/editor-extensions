@@ -1,0 +1,115 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Snovalang Manifest",
+    "scopeName": "source.snova.manifest",
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "#keywords" },
+        { "include": "#constants" },
+        { "include": "#numbers" },
+        { "include": "#operators" },
+        { "include": "#dependencies" }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.snova-manifest",
+                    "match": "//.*$"
+                },
+                {
+                    "name": "comment.line.number-sign.snova-manifest",
+                    "match": "#.*$"
+                },
+                {
+                    "name": "comment.block.snova-manifest",
+                    "begin": "/\\*",
+                    "end": "\\*/"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double.snova-manifest",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.snova-manifest",
+                            "match": "\\\\."
+                        },
+                        {
+                            "name": "keyword.operator.dependency-arrow.snova-manifest",
+                            "match": "->"
+                        },
+                        {
+                            "name": "constant.language.version-tag.snova-manifest",
+                            "match": "@[vV]?[0-9]+(\\.[0-9]+)*(-[a-zA-Z0-9_.-]+)?"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.snova-manifest",
+                    "begin": "'",
+                    "end": "'",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.snova-manifest",
+                            "match": "\\\\."
+                        }
+                    ]
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.declaration.module.snova-manifest",
+                    "match": "\\b(module|snova|dependencies|require)\\b"
+                },
+                {
+                    "name": "keyword.other.module-attribute.snova-manifest",
+                    "match": "\\b(root|is_root)\\b"
+                },
+                {
+                    "name": "keyword.other.dependency-kind.snova-manifest",
+                    "match": "\\b(direct|indirect)\\b"
+                }
+            ]
+        },
+        "constants": {
+            "patterns": [
+                {
+                    "name": "constant.language.boolean.snova-manifest",
+                    "match": "\\b(true|false)\\b"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.version.snova-manifest",
+                    "match": "\\b[vV]?[0-9]+(\\.[0-9]+)*\\b"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.snova-manifest",
+                    "match": "(=|->|@)"
+                }
+            ]
+        },
+        "dependencies": {
+            "patterns": [
+                {
+                    "name": "entity.name.namespace.module.snova-manifest",
+                    "match": "\\b[a-zA-Z0-9_.-]+(\\.[a-zA-Z0-9_.-]+)+(/[a-zA-Z0-9_.-]+)*\\b"
+                }
+            ]
+        }
+    }
+}
