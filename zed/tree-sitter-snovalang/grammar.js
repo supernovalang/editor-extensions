@@ -19,6 +19,7 @@ module.exports = grammar({
         $.type_declaration,
         $.function_declaration,
         $.method_declaration,
+        $.inline_member_declaration,
         $.pulsar_declaration,
         $.statement,
       ),
@@ -97,6 +98,25 @@ module.exports = grammar({
           optional(choice($.block, seq("=", $.expression))),
         ),
       ),
+
+    // Declarações estilo C#/Java: 'public static string GetUser(string id) { }'
+    // Sem keyword func/method — return type antes do nome.
+    inline_member_declaration: ($) =>
+      prec.right(
+        5,
+        seq(
+          repeat($.compile_decorator),
+          repeat1($.modifier),
+          optional("async"),
+          optional("unsafe"),
+          field("return_type", $.type),
+          field("name", $.identifier),
+          optional($.generic_parameters),
+          $.parameter_list,
+          optional(choice($.block, seq("=", $.expression))),
+        ),
+      ),
+
 
     property_declaration: ($) =>
       prec.right(

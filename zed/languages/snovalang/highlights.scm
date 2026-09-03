@@ -78,6 +78,11 @@
 (method_declaration
   name: (identifier) @function.method)
 
+; Inline member declarations (C#-style: 'public static string GetUser(...)')
+(inline_member_declaration
+  return_type: (_) @type
+  name: (identifier) @function.method)
+
 ; Type declarations
 (type_declaration
   name: (identifier) @type)

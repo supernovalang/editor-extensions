@@ -6,15 +6,16 @@ authors = ["Aggitech Team <dev@aggitech.com>"]
 description = "Snovalang language support and LSP integration for Zed editor"
 repository = "https://github.com/aggitech/snova-zed"
 
+# Grammars apontam para repositórios git locais (file://) para dev extension.
+# O 'rev' deve ser o SHA de um commit válido nesses repositórios.
+# Para publicar no registry do Zed, substitua por URLs públicos do GitHub.
 [grammars.snovalang]
-repository = "file:///Users/yurimoinhos/Projects/Aggitech/Supernova/editor-extensions"
-path = "zed/tree-sitter-snovalang"
-rev = "master"
+repository = "file:///C:/Users/yurimoinhos/Desktop/Projetos/Snovalang/editor-extensions/zed/grammars/snovalang"
+rev = "a7104c301972bf5edd5c6d399e2231699621bdcf"
 
 [grammars.snovalang_manifest]
-repository = "file:///Users/yurimoinhos/Projects/Aggitech/Supernova/editor-extensions"
-path = "zed/tree-sitter-snovalang-manifest"
-rev = "master"
+repository = "file:///C:/Users/yurimoinhos/Desktop/Projetos/Snovalang/editor-extensions/zed/grammars/snovalang_manifest"
+rev = "bfcba55d623d6e0737fc5e9d6fa1728664afc933"
 
 [language_servers.snova_lsp]
 name = "snova-lsp"

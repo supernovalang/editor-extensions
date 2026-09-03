@@ -1,6 +1,6 @@
 name = "Snovalang"
 grammar = "snovalang"
-path_suffixes = ["snova", "sno"]
+path_suffixes = ["snova"]
 line_comments = ["// "]
 block_comment = ["/*", "*/"]
 brackets = [
