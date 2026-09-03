@@ -1,0 +1,77 @@
+{
+    "Function Declaration": {
+        "prefix": "func",
+        "body": [
+            "func ${1:name}(${2:params}): ${3:unit} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Declares a Snovalang function"
+    },
+    "Method Declaration": {
+        "prefix": "method",
+        "body": [
+            "public method ${1:name}(${2:params}): ${3:unit} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Declares a member method"
+    },
+    "Class Declaration": {
+        "prefix": "class",
+        "body": [
+            "public class ${1:Name} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Declares a class"
+    },
+    "Struct Declaration": {
+        "prefix": "struct",
+        "body": [
+            "public struct ${1:Name} {",
+            "\tpublic let ${2:field}: ${3:string}",
+            "\t$0",
+            "}"
+        ],
+        "description": "Declares a struct"
+    },
+    "Enum Declaration": {
+        "prefix": "enum",
+        "body": [
+            "public enum ${1:Name} {",
+            "\t${2:Variant1},",
+            "\t${3:Variant2}(${4:payload}: ${5:string})",
+            "}"
+        ],
+        "description": "Declares an enum tagged union"
+    },
+    "Match Expression": {
+        "prefix": "match",
+        "body": [
+            "match ${1:expr} {",
+            "\t${2:pattern} -> ${3:result}",
+            "\t_ -> ${4:fallback}",
+            "}"
+        ],
+        "description": "Pattern matching expression"
+    },
+    "For Loop": {
+        "prefix": "for",
+        "body": [
+            "for (let ${1:item} in ${2:collection}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Iterates over collection"
+    },
+    "Pulsar Stream": {
+        "prefix": "pulsar",
+        "body": [
+            "pulsar func ${1:worker}(): unit {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Declares a concurrent pulsar worker"
+    }
+}

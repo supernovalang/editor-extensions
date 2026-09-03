@@ -1,0 +1,18 @@
+name = "Snovalang"
+grammar = "snovalang"
+path_suffixes = ["snova", "sno"]
+line_comments = ["// "]
+block_comment = ["/*", "*/"]
+
+[brackets]
+paired = [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["\"", "\""],
+    ["'", "'"],
+]
+
+[language_servers.snova_lsp]
+command = "snova-lsp"
+args = ["--stdio"]

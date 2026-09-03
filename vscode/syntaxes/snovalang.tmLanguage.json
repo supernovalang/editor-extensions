@@ -1,0 +1,125 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Snovalang",
+    "scopeName": "source.snova",
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "#numbers" },
+        { "include": "#keywords" },
+        { "include": "#types" },
+        { "include": "#decorators" },
+        { "include": "#functions" },
+        { "include": "#operators" }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.snova",
+                    "match": "//.*$"
+                },
+                {
+                    "name": "comment.block.snova",
+                    "begin": "/\\*",
+                    "end": "\\*/"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double.snova",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.snova",
+                            "match": "\\\\."
+                        },
+                        {
+                            "name": "meta.interpolation.snova",
+                            "begin": "\\$\\{",
+                            "end": "\\}",
+                            "beginCaptures": { "0": { "name": "punctuation.section.embedded.begin.snova" } },
+                            "endCaptures": { "0": { "name": "punctuation.section.embedded.end.snova" } },
+                            "patterns": [{ "include": "$self" }]
+                        }
+                    ]
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.decimal.snova",
+                    "match": "\\b\\d+(\\.\\d+)?(d|D)?\\b"
+                },
+                {
+                    "name": "constant.numeric.hex.snova",
+                    "match": "\\b0x[0-9a-fA-F]+\\b"
+                },
+                {
+                    "name": "constant.numeric.integer.snova",
+                    "match": "\\b\\d+(L|l)?\\b"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.snova",
+                    "match": "\\b(if|else|while|for|in|match|return|break|continue|try|catch|throw|defer|await)\\b"
+                },
+                {
+                    "name": "keyword.declaration.snova",
+                    "match": "\\b(package|import|class|struct|enum|interface|func|method|let|var|const|extension|typealias)\\b"
+                },
+                {
+                    "name": "keyword.other.snova",
+                    "match": "\\b(public|private|protected|override|static|async|pulsar|this|new|as|is|true|false)\\b"
+                }
+            ]
+        },
+        "types": {
+            "patterns": [
+                {
+                    "name": "support.type.primitive.snova",
+                    "match": "\\b(int|long|double|decimal|string|bool|unit)\\b"
+                },
+                {
+                    "name": "support.type.core.snova",
+                    "match": "\\b(Option|Result|Some|None|Ok|Err|Array|Map|List|Set|Task|Channel|ByteBuffer)\\b"
+                },
+                {
+                    "name": "entity.name.type.snova",
+                    "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+                }
+            ]
+        },
+        "decorators": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.decorator.snova",
+                    "match": "@[a-zA-Z0-9_]+"
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.snova",
+                    "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*\\()"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.snova",
+                    "match": "(\\+|-|\\*|/|%|=|==|!=|<|>|<=|>=|&&|\\|\\||!|\\?|\\?\\?|\\?\\.|->|~>|<~|=>|\\+=|-=|\\*=|/=)"
+                }
+            ]
+        }
+    }
+}

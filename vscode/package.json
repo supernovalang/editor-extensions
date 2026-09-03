@@ -1,0 +1,59 @@
+{
+    "name": "snovalang",
+    "displayName": "Snovalang",
+    "description": "Rich language support and IDE-agnostic LSP client for Snovalang",
+    "version": "0.1.0",
+    "publisher": "aggitech",
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Linters",
+        "Snippets"
+    ],
+    "main": "./out/extension.js",
+    "activationEvents": [
+        "onLanguage:snova"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "snova",
+                "aliases": ["Snovalang", "snova"],
+                "extensions": [".snova", ".sno"],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "snova",
+                "scopeName": "source.snova",
+                "path": "./syntaxes/snovalang.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "snova",
+                "path": "./snippets/snovalang.json"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Snovalang",
+            "properties": {
+                "snova.lsp.serverPath": {
+                    "type": "string",
+                    "default": "snova-lsp",
+                    "description": "Path to snova-lsp binary executable"
+                },
+                "snova.trace.server": {
+                    "type": "string",
+                    "enum": ["off", "messages", "verbose"],
+                    "default": "off",
+                    "description": "Traces communication between VS Code and Snovalang LSP"
+                }
+            }
+        }
+    }
+}
