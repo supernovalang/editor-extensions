@@ -1,5 +1,5 @@
 # build.ps1 — Compila a extensão Zed para Snovalang
-# Gera o arquivo extension.wasm necessário para instalação.
+# Compila o componente usado pelo Zed e substitui instalações anteriores.
 #
 # Uso:
 #   .\build.ps1              # Build release (padrão)
@@ -12,6 +12,8 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptDir
 
 # Verifica se rustup está instalado
 if (-not (Get-Command rustup -ErrorAction SilentlyContinue)) {
@@ -50,21 +52,48 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
-# Copia o .wasm para a raiz (onde o Zed espera encontrar)
+# Zed's extension builder encodes the Rust WASM into a component itself.
+# Do not copy a raw wasm module to extension.wasm.
 $wasmSrc = "target\$wasmTarget\$profile\zed_snovalang.wasm"
-$wasmDst = "extension.wasm"
-Copy-Item -Force $wasmSrc $wasmDst
-Write-Host "extension.wasm updated ($([Math]::Round((Get-Item $wasmDst).Length / 1KB)) KB)" -ForegroundColor Green
+if (-not (Test-Path $wasmSrc)) {
+    Write-Host "ERROR: Rust WASM output not found at $wasmSrc" -ForegroundColor Red
+    exit 1
+}
+if (Test-Path "extension.wasm") {
+    Remove-Item -Force "extension.wasm"
+}
+Write-Host "Rust WASM compiled; Zed will encode the extension component." -ForegroundColor Green
 
 if ($Install) {
-    $zedExtDir = "$env:APPDATA\Zed\extensions\installed\snovalang"
-    $srcDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    $zedRoot = if ($env:LOCALAPPDATA) { "$env:LOCALAPPDATA\Zed" } else { "$env:APPDATA\Zed" }
+    $zedExtDir = "$zedRoot\extensions\installed\snovalang"
+    $srcDir = $scriptDir
 
     if (Test-Path $zedExtDir) {
         Remove-Item -Recurse -Force $zedExtDir
     }
     New-Item -ItemType Directory -Force -Path (Split-Path $zedExtDir) | Out-Null
     Copy-Item -Recurse -Force $srcDir $zedExtDir
+    if (Test-Path (Join-Path $zedExtDir "extension.wasm")) {
+        Remove-Item -Force (Join-Path $zedExtDir "extension.wasm")
+    }
+    $zedBinDir = "$zedRoot\tools\bin"
+    New-Item -ItemType Directory -Force -Path $zedBinDir | Out-Null
+    $lspSource = Join-Path $scriptDir "..\..\snova-lsp\tools\bin\snova-lsp.exe"
+    if (-not (Test-Path $lspSource)) {
+        $lspSource = Join-Path $scriptDir "..\..\snova-lsp\build\snova-lsp.exe"
+    }
+    if (Test-Path $lspSource) {
+        Copy-Item -Force $lspSource (Join-Path $zedBinDir "snova-lsp.exe")
+        $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+        $pathEntries = @($userPath -split ';' | Where-Object { $_ })
+        if ($pathEntries -notcontains $zedBinDir) {
+            [Environment]::SetEnvironmentVariable("PATH", (($pathEntries + $zedBinDir) -join ';'), "User")
+            Write-Host "Added $zedBinDir to the user PATH." -ForegroundColor Green
+        }
+    } else {
+        Write-Host "WARNING: snova-lsp.exe was not found; build snova-lsp first." -ForegroundColor Yellow
+    }
     Write-Host "Extension installed to: $zedExtDir" -ForegroundColor Green
     Write-Host "Restart Zed and run 'zed: reload extensions' to activate." -ForegroundColor Yellow
 }

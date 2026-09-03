@@ -105,7 +105,9 @@ if ($selectedTags -contains "zed") {
     $zedExtensionSrc = Join-Path $scriptDir "zed"
 
     # Determine Zed extensions directory based on OS
-    $zedExtDir = "$env:APPDATA\Zed\extensions\installed\snovalang"
+    $zedRoot = if ($env:LOCALAPPDATA) { "$env:LOCALAPPDATA\Zed" } else { "$env:APPDATA\Zed" }
+    $zedExtDir = "$zedRoot\extensions\installed\snovalang"
+    $zedBinDir = "$zedRoot\tools\bin"
 
     if (-not (Test-Path $zedExtensionSrc)) {
         Write-Host "ERROR: Zed extension source not found at: $zedExtensionSrc" -ForegroundColor Red
@@ -120,7 +122,26 @@ if ($selectedTags -contains "zed") {
 
     # Copy extension files to Zed extensions directory
     New-Item -ItemType Directory -Force -Path (Split-Path $zedExtDir) | Out-Null
+    if (Test-Path $zedExtDir) { Remove-Item -Recurse -Force $zedExtDir }
     Copy-Item -Recurse -Force $zedExtensionSrc $zedExtDir
+    New-Item -ItemType Directory -Force -Path $zedBinDir | Out-Null
+    $lspSource = Join-Path $scriptDir "..\snova-lsp\tools\bin\snova-lsp.exe"
+    if (-not (Test-Path $lspSource)) {
+        $lspSource = Join-Path $scriptDir "..\snova-lsp\build\snova-lsp.exe"
+    }
+    if (Test-Path $lspSource) {
+        $installedLsp = Join-Path $zedBinDir "snova-lsp.exe"
+        if (Test-Path $installedLsp) { Remove-Item -Force $installedLsp }
+        Copy-Item -Force $lspSource $installedLsp
+        $userPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+        $pathEntries = @($userPath -split ';' | Where-Object { $_ })
+        if ($pathEntries -notcontains $zedBinDir) {
+            [Environment]::SetEnvironmentVariable("PATH", (($pathEntries + $zedBinDir) -join ';'), "User")
+            Write-Host "Added $zedBinDir to the user PATH." -ForegroundColor Green
+        }
+    } else {
+        Write-Host "WARNING: snova-lsp.exe was not found; build snova-lsp first." -ForegroundColor Yellow
+    }
     Write-Host "Snovalang Zed extension installed to: $zedExtDir" -ForegroundColor Green
     Write-Host ""
     Write-Host "IMPORTANT: Restart Zed and run 'zed: reload extensions' (Ctrl+Shift+P) to activate." -ForegroundColor Yellow
