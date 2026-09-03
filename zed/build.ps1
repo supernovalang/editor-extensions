@@ -69,15 +69,5 @@ if ($Install) {
     Write-Host "Restart Zed and run 'zed: reload extensions' to activate." -ForegroundColor Yellow
 }
 
-# Keep grammar revisions aligned with the commit that contains their paths.
-$repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path | Split-Path -Parent
-$currentRev = git -C $repoRoot rev-parse HEAD 2>$null
-if ($currentRev) {
-    $toml = Get-Content "extension.toml" -Raw
-    $toml = $toml -replace '(?m)^rev = ".*"', "rev = `"$($currentRev.Trim())`""
-    Set-Content "extension.toml" $toml -NoNewline
-    Write-Host "Grammar revisions updated to: $($currentRev.Trim().Substring(0,8))..." -ForegroundColor DarkGray
-}
-
 Write-Host ""
 Write-Host "Done! To install in Zed, run: .\build.ps1 -Install" -ForegroundColor Cyan

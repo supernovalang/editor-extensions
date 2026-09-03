@@ -7,14 +7,12 @@ description = "Snovalang language support and LSP integration for Zed editor"
 repository = "https://github.com/supernovalang/editor-extensions"
 
 [grammars.snovalang]
-repository = "https://github.com/supernovalang/editor-extensions"
-path = "zed/tree-sitter-snovalang"
-rev = "9ffdc254253d1a7245f0a78ea3dddc39887da1d4"
+repository = "file:///C:/Users/yurimoinhos/Desktop/Projetos/Snovalang/editor-extensions/zed/tree-sitter-snovalang"
+rev = "master"
 
 [grammars.snovalang_manifest]
-repository = "https://github.com/supernovalang/editor-extensions"
-path = "zed/tree-sitter-snovalang-manifest"
-rev = "9ffdc254253d1a7245f0a78ea3dddc39887da1d4"
+repository = "file:///C:/Users/yurimoinhos/Desktop/Projetos/Snovalang/editor-extensions/zed/tree-sitter-snovalang-manifest"
+rev = "master"
 
 [language_servers.snova_lsp]
 name = "snova-lsp"
