@@ -9,12 +9,12 @@ repository = "https://github.com/supernovalang/editor-extensions"
 [grammars.snovalang]
 repository = "https://github.com/supernovalang/editor-extensions"
 path = "zed/tree-sitter-snovalang"
-rev = "9ffdc25"
+rev = "9ffdc251691a0cda47c1eed0fc7ecf3f940f7808"
 
 [grammars.snovalang_manifest]
 repository = "https://github.com/supernovalang/editor-extensions"
 path = "zed/tree-sitter-snovalang-manifest"
-rev = "9ffdc25"
+rev = "9ffdc251691a0cda47c1eed0fc7ecf3f940f7808"
 
 [language_servers.snova_lsp]
 name = "snova-lsp"
