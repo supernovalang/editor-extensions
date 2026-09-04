@@ -68,6 +68,10 @@
         "keywords": {
             "patterns": [
                 {
+                    "name": "variable.language.this.snova",
+                    "match": "\\bthis\\b"
+                },
+                {
                     "name": "keyword.control.snova",
                     "match": "\\b(if|else|while|for|in|match|return|break|continue|try|catch|throw|defer|await)\\b"
                 },
@@ -77,7 +81,7 @@
                 },
                 {
                     "name": "keyword.other.snova",
-                    "match": "\\b(public|private|protected|override|static|async|pulsar|this|new|as|is|true|false)\\b"
+                    "match": "\\b(public|private|protected|override|static|async|pulsar|new|as|is|true|false)\\b"
                 }
             ]
         },

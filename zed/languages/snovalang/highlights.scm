@@ -1,3 +1,7 @@
+; Builtin variables / Language keywords
+((identifier) @variable.builtin
+  (#eq? @variable.builtin "this"))
+
 ; Keywords
 [
   "package"
@@ -31,6 +35,18 @@
   "implements"
   "extends"
 ] @keyword
+
+((identifier) @keyword
+  (#any-of? @keyword
+    "typealias"
+    "while"
+    "break"
+    "continue"
+    "try"
+    "catch"
+    "throw"
+    "as"
+    "is"))
 
 ; Modifiers
 [
