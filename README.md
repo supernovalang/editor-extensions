@@ -5,7 +5,7 @@ Official editor extensions for **VS Code** and **Zed** providing complete editin
 ## Extensions
 
 ### 1. VS Code ([`vscode/`](vscode/))
-- TextMate grammar highlighting (`.snova`, `.sno`)
+- TextMate grammar highlighting (`.snl`, `.sns`)
 - Code snippets (`func`, `method`, `class`, `struct`, `enum`, `match`, `for`, `pulsar`)
 - Language configuration (bracket matching, auto-closing pairs)
 - LSP Client connecting to `snova-lsp` via stdio

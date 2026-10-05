@@ -9,4 +9,4 @@ Extensão oficial do Snovalang para Visual Studio Code com integração completa
 
 ## Instalação e Uso
 1. Certifique-se de que o executável `snova-lsp` está presente no seu `PATH` (ou configure em `snova.lsp.serverPath`).
-2. Abra qualquer arquivo `.snova` ou `.sno` no VS Code.
+2. Abra qualquer arquivo `.snl` ou `.sns` no VS Code.

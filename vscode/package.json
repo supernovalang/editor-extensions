@@ -16,8 +16,8 @@
     "activationEvents": [
         "onLanguage:snova",
         "onLanguage:snova-manifest",
-        "workspaceContains:**/mod.sno",
-        "workspaceContains:**/snova.sno",
+        "workspaceContains:**/*.snl",
+        "workspaceContains:**/*.sns",
         "workspaceContains:**/snova.toml"
     ],
     "contributes": {
@@ -25,13 +25,13 @@
             {
                 "id": "snova",
                 "aliases": ["Snovalang", "snova"],
-                "extensions": [".snova", ".sno"],
+                "extensions": [".snl", ".sns"],
                 "configuration": "./language-configuration.json"
             },
             {
                 "id": "snova-manifest",
-                "aliases": ["Snovalang Manifest", "mod.sno"],
-                "filenames": ["mod.sno", "snova.mod", "snova.sno", "snova.toml", "Snovalang.toml"]
+                "aliases": ["Snovalang Manifest", "mod.sns"],
+                "filenames": ["mod.sns", "snova.sns", "snova.toml", "Snovalang.toml"]
             }
         ],
         "grammars": [
@@ -73,7 +73,7 @@
         "menus": {
             "editor/title": [
                 {
-                    "when": "resourceExtname == .snova",
+                    "when": "resourceExtname == .snl || resourceExtname == .sns",
                     "command": "snova.runFile",
                     "group": "navigation"
                 }
